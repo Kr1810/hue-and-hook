@@ -40,9 +40,9 @@ The email and phone are stored **in parts** and joined in the browser after the 
 
 LinkedIn is the only social link: `LINKEDIN_URL` in the same file, rendered by `components/LinkedInIcon.jsx`.
 
-### Experience & education → `server/data/experience.json`
+### Experience → `server/data/experience.json`
 
-Served at `GET /api/experience` as `{ experience, education }`. Each job has `title, type, company, location, workMode, start, end, highlights[], tags[]`, listed newest first. The timeline alternates right/left automatically. The education entry contains **placeholders**, so replace the bracketed values.
+Served at `GET /api/experience` as `{ experience }`. Each job has `title, type, company, location, workMode, start, end, highlights[], tags[]`, listed newest first. The timeline alternates right/left automatically.
 
 ### Résumé PDF → `client/public/Krina_Suthar_AI_UIUX_Designer.pdf`
 
@@ -69,7 +69,7 @@ All routes return JSON. Errors always look like `{ "error": { "message", "detail
 | GET | `/api/health` | Health check |
 | GET | `/api/site` | Site config + `siteUrl` |
 | GET | `/api/work`, `/api/work/:slug` | List / full case study with `prev` & `next` |
-| GET | `/api/experience` | `{ experience: [...], education: [...] }` |
+| GET | `/api/experience` | `{ experience: [...] }` |
 | POST | `/api/contact` | `{ name, email, projectType, budget, timeline?, message }`, appended to `data/inquiries.json`. Limit: 10 per 15 min per IP. |
 
 `projectType` is one of: Brand identity, UI/UX, Packaging, Social media, Print, Illustration, Motion, Other. `budget` is one of: < ₹25k, ₹25k–75k, ₹75k–1.5L, ₹1.5L+. The client and server validate the same rules (`client/src/lib/validate.js` ↔ `server/src/validation/schemas.js`).

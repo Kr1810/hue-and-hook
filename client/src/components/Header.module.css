@@ -70,7 +70,10 @@
   letter-spacing: -0.03em;
 }
 
-/* Bold wrapping list of text links. No hamburger, ever. */
+/* ---- Icon navigation --------------------------------------------------
+   Phones: a row of icon buttons in the header.
+   640px+: a vertical rail fixed to the right edge, vertically centred
+   (mirrors the theme dots on the left; global.css pads .wrap to clear it). */
 .nav {
   margin-top: clamp(0.75rem, 2vw, 1.25rem);
 }
@@ -78,17 +81,104 @@
 .nav ul {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.25rem clamp(1rem, 2.4vw, 1.9rem);
+  gap: 0.35rem;
   list-style: none;
   margin: 0;
   padding: 0;
 }
 
+/* Round 44px icon button, same outline language as the theme dots. */
 .navLink {
-  display: inline-block;
-  padding-block: 0.3rem;
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: clamp(1.15rem, 2vw, 1.4rem);
-  letter-spacing: -0.02em;
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border: var(--border) solid currentColor;
+  border-radius: 50%;
+  background: var(--bg);
+  color: var(--fg);
+  text-decoration: none;
+  transition: background-color 200ms, color 200ms, border-color 200ms, transform 200ms var(--ease-out);
+}
+
+.navLink svg {
+  width: 20px;
+  height: 20px;
+}
+
+.navLink:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--on-accent);
+  transform: scale(1.06);
+}
+
+/* Current page: filled. */
+.navLink[aria-current="page"] {
+  background: var(--fg);
+  border-color: var(--fg);
+  color: var(--bg);
+}
+
+/* Label: the link's accessible name; visually a tooltip. On phones it stays
+   visually hidden (no hover), but screen readers still read it. */
+.navLabel {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+@media (min-width: 640px) {
+  .nav {
+    position: fixed;
+    top: 50%;
+    right: 0.5rem;
+    z-index: 50; /* above page content, below the TV loader */
+    margin: 0;
+    transform: translateY(-50%);
+  }
+
+  .nav ul {
+    flex-direction: column;
+    flex-wrap: nowrap;
+    gap: 0.5rem;
+  }
+
+  /* Tooltip to the left of the icon on hover / keyboard focus. */
+  .navLabel {
+    right: calc(100% + 0.6rem);
+    top: 50%;
+    width: auto;
+    height: auto;
+    overflow: visible;
+    clip-path: none;
+    padding: 0.3em 0.75em;
+    border-radius: 999px;
+    background: var(--fg);
+    color: var(--bg);
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 0.95rem;
+    letter-spacing: -0.01em;
+    opacity: 0;
+    pointer-events: none;
+    transform: translate(6px, -50%);
+    transition: opacity 180ms ease, transform 180ms var(--ease-out);
+  }
+
+  .navLink:hover .navLabel,
+  .navLink:focus-visible .navLabel {
+    opacity: 1;
+    transform: translate(0, -50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .navLink:hover {
+    transform: none;
+  }
 }

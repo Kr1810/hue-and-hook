@@ -1,7 +1,9 @@
 /* ==========================================================================
    Experience timeline
-   Cards keep a fixed cream style in EVERY theme so they stay readable on
-   the coloured backgrounds; text inside uses fixed dark colours.
+   Layout: centred line, cards alternating right/left, date labels on the
+   line, single column below 900px.
+   Look: the site's own style. Theme colours (they follow the switcher),
+   solid borders in the text colour, square corners, no shadows, site fonts.
    ========================================================================== */
 
 .timeline {
@@ -20,14 +22,12 @@
   width: var(--line-w);
   transform: translateX(-50%);
   background: color-mix(in srgb, var(--muted) 40%, transparent);
-  border-radius: 2px;
 }
 
 .fill {
   position: absolute;
   inset: 0;
   background: var(--fg);
-  border-radius: inherit;
   transform: scaleY(0);
   transform-origin: top;
   will-change: transform;
@@ -70,9 +70,9 @@
   max-width: calc(var(--gap) * 2);
   background: var(--bg);
   transition: background-color var(--theme-fade);
-  font-family: "JetBrains Mono", ui-monospace, "Cascadia Mono", Consolas, monospace;
+  font-family: var(--font-body);
   font-size: 0.875rem;
-  font-weight: 500;
+  font-weight: 600;
   letter-spacing: 0.02em;
   line-height: 1.35;
   text-align: center;
@@ -83,25 +83,17 @@
   display: block;
 }
 
-/* ---- Card ---- */
+/* ---- Card: the site's bordered block (like .callout / .pager__link) ---- */
 .card {
-  background: #fcf9f2;
-  border: 1px solid rgba(0, 0, 0, 0.06);
-  border-radius: 28px;
   padding: clamp(24px, 3vw, 40px);
-  box-shadow: 0 20px 50px -20px rgba(0, 0, 0, 0.15);
-  color: #3d4752;
-  transition: transform 250ms ease, box-shadow 250ms ease;
+  border: var(--border-thick) solid currentColor;
+  background: var(--bg);
+  color: var(--fg);
+  transition: background-color var(--theme-fade), border-color 200ms ease;
 }
 
 .card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 28px 60px -20px rgba(0, 0, 0, 0.22);
-}
-
-.card ::selection {
-  background: #1f2328;
-  color: #fcf9f2;
+  border-color: var(--accent);
 }
 
 .title {
@@ -110,23 +102,24 @@
   font-weight: 700;
   font-size: 1.75rem;
   line-height: 1.15;
-  letter-spacing: -0.02em;
-  color: #1f2328;
+  letter-spacing: -0.03em;
   text-wrap: pretty;
 }
 
 .type {
-  font-weight: 500;
-  color: #4a5560;
+  font-weight: 700;
+  color: var(--muted);
 }
 
+/* Same treatment as the site's eyebrow labels */
 .meta {
   margin: 0 0 24px;
-  font-family: "JetBrains Mono", ui-monospace, "Cascadia Mono", Consolas, monospace;
+  font-family: var(--font-body);
   font-size: 0.85rem;
-  letter-spacing: 0.08em;
+  font-weight: 600;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: #5b6670;
+  color: var(--muted);
 }
 
 /* Dash markers with a hanging indent so wrapped lines align with the text. */
@@ -142,10 +135,8 @@
   position: relative;
   padding-left: 1.4em;
   font-family: var(--font-body);
-  font-weight: 500;
   font-size: 1.05rem;
   line-height: 1.6;
-  color: #3d4752;
 }
 
 .highlights li::before {
@@ -153,63 +144,28 @@
   position: absolute;
   left: 0;
   top: 0;
-  color: #2c4a5c;
-  font-weight: 600;
+  font-weight: 700;
 }
 
+/* Tags reuse the site's pill shape (see .tag in global.css) */
 .tags {
   display: flex;
   flex-wrap: wrap;
-  gap: 12px;
+  gap: 0.6rem;
   margin: 28px 0 0;
   padding: 0;
   list-style: none;
 }
 
 .tags li {
-  padding: 6px 16px;
-  border: 1px solid #d9ddd9;
-  border-radius: 8px;
-  background: #eef0ee;
+  padding: 0.25em 0.8em;
+  border: var(--border) solid currentColor;
+  border-radius: 999px;
   font-family: var(--font-body);
-  font-size: 0.95rem;
-  line-height: 1.4;
-  color: #2c4a5c;
-}
-
-/* ---- Education ---- */
-.education {
-  display: grid;
-  gap: 1rem;
-  margin: 0 0 var(--space-m);
-  padding: 0;
-  list-style: none;
-  max-width: 40rem;
-}
-
-.eduItem {
-  padding: clamp(20px, 2.5vw, 28px);
-  border-radius: 20px;
-  background: #fcf9f2;
-  border: 1px solid rgba(0, 0, 0, 0.06);
-  box-shadow: 0 20px 50px -20px rgba(0, 0, 0, 0.15);
-}
-
-.eduDegree {
-  margin: 0;
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: 1.35rem;
-  color: #1f2328;
-}
-
-.eduMeta {
-  margin: 0.35rem 0 0;
-  font-family: "JetBrains Mono", ui-monospace, monospace;
   font-size: 0.85rem;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: #5b6670;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  line-height: 1.4;
 }
 
 /* ---- Mobile: single column, line on the left ---- */
@@ -245,11 +201,5 @@
 
   .title {
     font-size: 1.45rem;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .card:hover {
-    transform: none;
   }
 }

@@ -5,13 +5,14 @@ import Marquee from "./Marquee.jsx";
 import { useSite } from "../context/SiteContext.jsx";
 import styles from "./Header.module.css";
 import TransitionLink from "./TransitionLink.jsx";
+import { AboutIcon, ContactIcon, ExperienceIcon, HomeIcon, WorkIcon } from "./NavIcons.jsx";
 
 const NAV = [
-  { to: "/", label: "Home", end: true },
-  { to: "/about", label: "About" },
-  { to: "/work", label: "Work" },
-  { to: "/experience", label: "Experience" },
-  { to: "/contact", label: "Contact" },
+  { to: "/", label: "Home", Icon: HomeIcon, end: true },
+  { to: "/about", label: "About", Icon: AboutIcon },
+  { to: "/work", label: "Work", Icon: WorkIcon },
+  { to: "/experience", label: "Experience", Icon: ExperienceIcon },
+  { to: "/contact", label: "Contact", Icon: ContactIcon },
 ];
 
 /**
@@ -58,12 +59,15 @@ export default function Header() {
         </>
       )}
 
+      {/* Icon nav. The label is the link's accessible name and shows as a
+          tooltip on hover/focus. 640px+: fixed rail on the right edge. */}
       <nav className={styles.nav} aria-label="Main">
         <ul>
-          {NAV.map((item) => (
-            <li key={item.to}>
-              <TransitionLink nav end={item.end} className={`link-underline ${styles.navLink}`} to={item.to}>
-                {item.label}
+          {NAV.map(({ to, label, Icon, end }) => (
+            <li key={to}>
+              <TransitionLink nav end={end} className={styles.navLink} to={to}>
+                <Icon />
+                <span className={styles.navLabel}>{label}</span>
               </TransitionLink>
             </li>
           ))}

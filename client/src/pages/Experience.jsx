@@ -140,26 +140,11 @@ export default function Experience() {
       )}
 
       {data && (
-        <section className="section" aria-labelledby="education-title">
-          <Reveal as="h2" className="section-title" id="education-title">
-            Education
-          </Reveal>
-          <ul className={styles.education}>
-            {data.education.map((item) => (
-              <Reveal as="li" key={`${item.degree}-${item.year}`} className={styles.eduItem}>
-                <p className={styles.eduDegree}>{item.degree}</p>
-                <p className={styles.eduMeta}>
-                  {item.institute} · {item.year}
-                </p>
-              </Reveal>
-            ))}
-          </ul>
-          <div className="actions">
-            <a className="button button--big" href="/Krina_Suthar_AI_UIUX_Designer.pdf" download>
-              Download résumé <span aria-hidden="true">↓</span>
-            </a>
-          </div>
-        </section>
+        <div className="actions section">
+          <a className="button button--big" href="/Krina_Suthar_AI_UIUX_Designer.pdf" download>
+            Download résumé <span aria-hidden="true">↓</span>
+          </a>
+        </div>
       )}
 
       <BackToTop />
