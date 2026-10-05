@@ -1,7 +1,7 @@
 import { matchPath } from "react-router-dom";
 
 /** Every real route. Anything else renders the 404 page. */
-export const ROUTE_PATTERNS = ["/", "/about", "/work", "/work/:slug", "/experience", "/contact", "/imprint"];
+export const ROUTE_PATTERNS = ["/", "/about", "/work", "/work/:slug", "/experience", "/contact"];
 
 export const isKnownRoute = (pathname) =>
   ROUTE_PATTERNS.some((pattern) => matchPath({ path: pattern, end: true }, pathname));

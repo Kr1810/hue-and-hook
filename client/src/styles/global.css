@@ -281,6 +281,15 @@ main:focus,
   flex-direction: column;
 }
 
+/* The theme switcher is a fixed rail on the left from 640px up. Keep content
+   at least 4rem from the viewport edge so it never slides under the dots.
+   On wide screens the centred column already clears it, so nothing changes. */
+@media (min-width: 640px) {
+  .wrap {
+    padding-left: max(var(--gutter), calc(4rem - max(0px, (100vw - var(--wrap)) / 2)));
+  }
+}
+
 /* Stop wide children (the marquee track) stretching flex items. */
 .wrap > * {
   min-width: 0;

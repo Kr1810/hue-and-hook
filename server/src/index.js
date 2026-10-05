@@ -17,7 +17,7 @@ const { clientDist } = config.paths;
 const indexFile = path.join(clientDist, "index.html");
 
 /* ---- SPA route awareness (for correct 404 status codes) ---- */
-const STATIC_ROUTES = new Set(["/", "/about", "/work", "/experience", "/contact", "/imprint"]);
+const STATIC_ROUTES = new Set(["/", "/about", "/work", "/experience", "/contact"]);
 
 async function routeExists(pathname) {
   const clean = pathname.replace(/\/+$/, "") || "/";

@@ -14,7 +14,6 @@ const Work = lazy(() => import("./pages/Work.jsx"));
 const CaseStudy = lazy(() => import("./pages/CaseStudy.jsx"));
 const Experience = lazy(() => import("./pages/Experience.jsx"));
 const Contact = lazy(() => import("./pages/Contact.jsx"));
-const Imprint = lazy(() => import("./pages/Imprint.jsx"));
 const NotFound = lazy(() => import("./pages/NotFound.jsx"));
 
 // Animation features arrive in their own chunk after first render.
@@ -35,7 +34,6 @@ function AppRoutes() {
           <Route path="/work/:slug" element={<CaseStudy />} />
           <Route path="/experience" element={<Experience />} />
           <Route path="/contact" element={<Contact />} />
-          <Route path="/imprint" element={<Imprint />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Suspense>

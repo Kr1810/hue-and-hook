@@ -2,6 +2,20 @@
   padding-top: clamp(1rem, 3vw, 2rem);
 }
 
+/* Home: the marquee is flush with the top of the page; spacing moves below it. */
+.headerHome {
+  padding-top: 0;
+}
+
+.topMarquee.topMarquee { /* doubled class: beats Marquee.module.css regardless of load order */
+  margin-top: 0;
+  border-top: 0;
+}
+
+.headerHome .bar {
+  margin-top: clamp(1rem, 3vw, 2rem);
+}
+
 .bar {
   display: flex;
   align-items: center;
@@ -33,6 +47,18 @@
 
 .display {
   margin-top: clamp(2.5rem, 9vw, 7rem);
+}
+
+/* Home: the availability pill sits above the name and takes over the big
+   gap; the name follows closely. Doubled class beats global .status-pill. */
+.status.status {
+  display: flex;
+  width: fit-content;
+  margin-top: clamp(2rem, 7vw, 5.5rem);
+}
+
+.displayAfterStatus.displayAfterStatus {
+  margin-top: clamp(1rem, 2.5vw, 1.75rem);
 }
 
 .role {

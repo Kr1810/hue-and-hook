@@ -2,7 +2,6 @@ import { createContext, useCallback, useContext, useEffect, useLayoutEffect, use
 import { useLocation, useNavigate } from "react-router-dom";
 import { LOADER, channelFor } from "../config/loader.js";
 import { useReducedMotion } from "../hooks/useReducedMotion.js";
-import { readStaticEnabled, saveStaticEnabled } from "../components/loader/staticAudio.js";
 
 /**
  * Page-transition state machine for the TV loader.
@@ -59,7 +58,6 @@ export function PageTransitionProvider({ children }) {
     seed: Math.random(),
     ...channelFor(location.pathname),
   }));
-  const [soundOn, setSoundOnState] = useState(readStaticEnabled);
 
   // Mutable machine state (timers fire outside React's render cycle).
   const phaseRef = useRef("enter");
@@ -176,11 +174,6 @@ export function PageTransitionProvider({ children }) {
     machine.current.maybeExit();
   }, []);
 
-  const setSoundOn = useCallback((on) => {
-    saveStaticEnabled(on);
-    setSoundOnState(on);
-  }, []);
-
   const value = useMemo(
     () => ({
       ...state,
@@ -188,10 +181,8 @@ export function PageTransitionProvider({ children }) {
       active: state.phase !== "idle",
       navigateWithTransition,
       markReady,
-      soundOn,
-      setSoundOn,
     }),
-    [state, reduced, navigateWithTransition, markReady, soundOn, setSoundOn]
+    [state, reduced, navigateWithTransition, markReady]
   );
 
   return <PageTransitionContext.Provider value={value}>{children}</PageTransitionContext.Provider>;
@@ -202,8 +193,6 @@ const NOOP = {
   active: false,
   navigateWithTransition: () => false,
   markReady: () => {},
-  soundOn: false,
-  setSoundOn: () => {},
 };
 
 export function usePageTransition() {

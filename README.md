@@ -5,7 +5,7 @@ A type-first portfolio for Krina Suthar, a graphic designer in Ahmedabad. It has
 - **client/** is React 18 + Vite, with React Router 6, framer-motion, react-helmet-async, react-markdown and plain CSS (a global stylesheet + CSS Modules).
 - **server/** is Node 20+ and Express 5, with helmet, CORS, rate limiting, zod validation, and JSON + Markdown files as storage.
 
-Pages: **Home · About · Work (+ case studies) · Experience · Contact**, plus Imprint and a 404.
+Pages: **Home · About · Work (+ case studies) · Experience · Contact**, plus a 404.
 
 ## Quick start
 
@@ -58,7 +58,7 @@ Section **2. Themes** defines each theme's `--bg`, `--fg`, `--accent` and the re
 
 ### Transition loader channels → `client/src/config/loader.js`
 
-`CH 01 HOME`, `CH 02 ABOUT`, `CH 03 WORK`, `CH 04 EXPERIENCE`, `CH 05 CONTACT`, `CH 06 IMPRINT`, `CH 00 404`. Timings and noise settings live there too.
+`CH 01 HOME`, `CH 02 ABOUT`, `CH 03 WORK`, `CH 04 EXPERIENCE`, `CH 05 CONTACT`, `CH 00 404`. Timings and noise settings live there too.
 
 ## API
 

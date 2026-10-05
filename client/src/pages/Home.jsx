@@ -1,5 +1,4 @@
 import Seo from "../components/Seo.jsx";
-import Marquee from "../components/Marquee.jsx";
 import TransitionLink from "../components/TransitionLink.jsx";
 import { Skeleton } from "../components/Skeleton.jsx";
 import { useSite } from "../context/SiteContext.jsx";
@@ -7,8 +6,8 @@ import { usePageReady } from "../hooks/usePageReady.js";
 import { joinEmail, joinPhone, LINKEDIN_URL } from "../config/contact.js";
 
 /**
- * Deliberately sparse: the giant name, role line and nav live in the
- * header, and the shader is the hero.
+ * Deliberately sparse: the top marquee, giant name, role line and nav live
+ * in the header, and the shader is the hero.
  */
 export default function Home() {
   usePageReady(true); // no data to wait for
@@ -43,11 +42,6 @@ export default function Home() {
       <div className="hero">
         <p className="hero__tagline">{site.tagline}</p>
 
-        <p className="status-pill">
-          <span className="status-pill__dot" aria-hidden="true" />
-          {site.status}
-        </p>
-
         <div className="actions">
           <TransitionLink className="button button--big" to="/work">
             See my work <span aria-hidden="true">→</span>
@@ -57,11 +51,6 @@ export default function Home() {
           </TransitionLink>
         </div>
       </div>
-
-      <Marquee
-        items={["Brand identity", "UI/UX", "Packaging", "Social creatives", "Posters", "Motion"]}
-        label="Brand identity, UI/UX, packaging, social creatives, posters and motion."
-      />
 
       <p className="currently">
         <span className="currently__label">Currently:</span>

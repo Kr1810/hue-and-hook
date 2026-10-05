@@ -1,9 +1,24 @@
+/* Phones: a row in the header. 640px and up: a vertical rail pinned to the
+   left edge, vertically centred (global.css pads .wrap so content clears it). */
 .switcher {
   display: flex;
   align-items: center;
   gap: 0.15rem;
   margin-left: auto; /* stays right-aligned when the header row wraps */
   margin-right: -0.5rem; /* optically align the last dot with the edge */
+}
+
+@media (min-width: 640px) {
+  .switcher {
+    position: fixed;
+    top: 50%;
+    left: 0.5rem;
+    z-index: 50; /* above page content, below the TV loader */
+    flex-direction: column;
+    gap: 0.25rem;
+    margin: 0;
+    transform: translateY(-50%);
+  }
 }
 
 /* Swatch colors — keep in sync with the theme blocks in global.css. */

@@ -36,10 +36,6 @@ export const LOADER = {
     rollPeriod: 2.5, // seconds per rolling-band cycle
     fps: 24, // time is stepped like analog video
   },
-
-  // Optional hiss (Web Audio, off by default)
-  audio: { gain: 0.04, bandpassHz: 3200, q: 0.8 },
-  audioStorageKey: "static-fx",
 };
 
 /** One channel per route. Sub-routes inherit their section's channel. */
@@ -49,7 +45,6 @@ export const CHANNELS = [
   { path: "/work", channel: "CH 03 WORK", name: "Work" },
   { path: "/experience", channel: "CH 04 EXPERIENCE", name: "Experience" },
   { path: "/contact", channel: "CH 05 CONTACT", name: "Contact" },
-  { path: "/imprint", channel: "CH 06 IMPRINT", name: "Imprint" },
 ];
 
 export const NOT_FOUND_CHANNEL = { path: null, channel: "CH 00 404", name: "Page not found" };

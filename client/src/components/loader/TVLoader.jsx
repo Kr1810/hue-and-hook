@@ -3,7 +3,6 @@ import { usePageTransition } from "../../context/PageTransitionContext.jsx";
 import { useSite } from "../../context/SiteContext.jsx";
 import { LOADER } from "../../config/loader.js";
 import { createTVRenderer } from "./createTVRenderer.js";
-import { startStatic, stopStatic } from "./staticAudio.js";
 import styles from "./TVLoader.module.css";
 
 /**
@@ -15,7 +14,7 @@ import styles from "./TVLoader.module.css";
  *   idle   → hidden, render loop stopped (canvas + context kept for reuse)
  */
 export default function TVLoader() {
-  const { phase, channel, name, seed, reduced, soundOn } = usePageTransition();
+  const { phase, channel, name, seed, reduced } = usePageTransition();
   const { site } = useSite();
   const hostRef = useRef(null);
   const rendererRef = useRef(null);
@@ -42,13 +41,6 @@ export default function TVLoader() {
     renderer.setIntensity(reduced ? LOADER.reduced.intensity : phase === "exit" ? LOADER.exitIntensity : 1);
     renderer.start({ reduced });
   }, [phase, seed, reduced]);
-
-  // Optional hiss while visible (never with reduced motion).
-  useEffect(() => {
-    if (soundOn && !reduced && phase !== "idle") startStatic();
-    else stopStatic();
-  }, [soundOn, reduced, phase]);
-  useEffect(() => stopStatic, []);
 
   const timing = {
     "--flash-ms": `${LOADER.flashMs}ms`,

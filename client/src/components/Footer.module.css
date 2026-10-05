@@ -18,22 +18,6 @@
   font-weight: 600;
 }
 
-.sound {
-  padding: 0.1em 0.6em;
-  border: var(--border) solid currentColor;
-  border-radius: 999px;
-  background: transparent;
-  font-weight: 600;
-  font-size: 0.85rem;
-  cursor: pointer;
-}
-
-.sound[aria-pressed="true"] {
-  background: var(--accent);
-  border-color: var(--accent);
-  color: var(--on-accent);
-}
-
 .legal {
   color: var(--muted);
 }
