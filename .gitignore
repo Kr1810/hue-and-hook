@@ -1,0 +1,23 @@
+# Dependencies
+node_modules/
+
+# Builds
+client/dist/
+
+# Env
+.env
+.env.*
+!.env.example
+
+# Runtime data written by the API (seed files are committed; these temp files are not)
+server/data/*.tmp
+
+# Logs / OS / editor
+npm-debug.log*
+*.log
+.DS_Store
+Thumbs.db
+.eslintcache
+
+# Old Eleventy version, kept locally for reference
+legacy-eleventy/

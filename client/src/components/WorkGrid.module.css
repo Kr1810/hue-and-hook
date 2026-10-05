@@ -1,0 +1,26 @@
+/* 12 columns. Pattern: full │ 7+5 │ 5+7 │ 7+5 │ full */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: clamp(2.5rem, 5vw, 4rem) clamp(1.25rem, 3vw, 2.5rem);
+}
+
+.cell {
+  grid-column: span 12;
+}
+
+@media (min-width: 760px) {
+  .cell:nth-child(4n + 2),
+  .cell:nth-child(4n + 1) {
+    grid-column: span 7;
+  }
+  .cell:nth-child(4n + 3),
+  .cell:nth-child(4n) {
+    grid-column: span 5;
+  }
+  .cell:first-child,
+  .cell:last-child:nth-child(even) {
+    grid-column: span 12;
+    --card-ratio: 2 / 1;
+  }
+}

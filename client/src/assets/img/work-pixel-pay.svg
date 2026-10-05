@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" width="1600" height="1000">
+  <rect width="1600" height="1000" fill="#5b3cc4"/>
+  
+    <rect x="1080" y="250" width="240" height="460" rx="36" fill="#f4f2ff" stroke="#1d1640" stroke-width="10"/>
+    <circle cx="1200" cy="440" r="80" fill="#7de2c3"/>
+    <circle cx="1200" cy="440" r="56" fill="none" stroke="#1d1640" stroke-width="8"/>
+    <text x="1200" y="465" text-anchor="middle" font-family="'Space Grotesk', 'Arial Black', Arial, sans-serif" font-weight="700" font-size="70" fill="#1d1640">₹</text>
+    <rect x="1120" y="580" width="160" height="34" rx="17" fill="#ff8a65"/>
+  <text x="80" y="190" font-family="Inter, Arial, sans-serif" font-weight="600" font-size="34" fill="#f4f2ff">UI visuals &amp; illustration · 2025</text>
+  <text x="72" y="672" font-family="'Space Grotesk', 'Arial Black', Arial, sans-serif" font-weight="700" font-size="150" letter-spacing="-6" fill="#f4f2ff">Pixel</text>
+  <text x="72" y="810" font-family="'Space Grotesk', 'Arial Black', Arial, sans-serif" font-weight="700" font-size="150" letter-spacing="-6" fill="#f4f2ff">Pay</text>
+  <rect x="80" y="850" width="44" height="44" rx="22" fill="#5b3cc4" stroke="#f4f2ff" stroke-width="3"/><rect x="136" y="850" width="44" height="44" rx="22" fill="#7de2c3" stroke="#f4f2ff" stroke-width="3"/><rect x="192" y="850" width="44" height="44" rx="22" fill="#f4f2ff" stroke="#f4f2ff" stroke-width="3"/><rect x="248" y="850" width="44" height="44" rx="22" fill="#ff8a65" stroke="#f4f2ff" stroke-width="3"/><rect x="304" y="850" width="44" height="44" rx="22" fill="#1d1640" stroke="#f4f2ff" stroke-width="3"/>
+  <text x="1520" y="880" font-family="Inter, Arial, sans-serif" font-weight="600" font-size="26" fill="#f4f2ff" text-anchor="end" opacity="0.7">placeholder · replace me</text>
+</svg>

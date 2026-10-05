@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" width="1600" height="1000">
+  <rect width="1600" height="1000" fill="#f3e3c3"/>
+  
+    <path d="M1080 330 h220 l-30 330 h-160 z" fill="#f3e3c3" stroke="#2e1d14" stroke-width="10"/>
+    <line x1="1110" y1="345" x2="1120" y2="645" stroke="#2e1d14" stroke-width="6" opacity="0.35"/><line x1="1150" y1="345" x2="1154" y2="645" stroke="#2e1d14" stroke-width="6" opacity="0.35"/><line x1="1190" y1="345" x2="1188" y2="645" stroke="#2e1d14" stroke-width="6" opacity="0.35"/><line x1="1230" y1="345" x2="1222" y2="645" stroke="#2e1d14" stroke-width="6" opacity="0.35"/><line x1="1270" y1="345" x2="1256" y2="645" stroke="#2e1d14" stroke-width="6" opacity="0.35"/>
+    <path d="M1082 420 h216 l-22 240 h-172 z" fill="#e8a33d" opacity="0.85"/>
+    <path d="M1150 300 q30 -40 0 -80 M1200 300 q30 -40 0 -80 M1250 300 q30 -40 0 -80" fill="none" stroke="#f3e3c3" stroke-width="10" stroke-linecap="round"/>
+  <text x="80" y="190" font-family="Inter, Arial, sans-serif" font-weight="600" font-size="34" fill="#2e1d14">Brand identity · 2026</text>
+  <text x="72" y="810" font-family="'Space Grotesk', 'Arial Black', Arial, sans-serif" font-weight="700" font-size="150" letter-spacing="-6" fill="#2e1d14">Chai &amp; Co.</text>
+  <rect x="80" y="850" width="44" height="44" rx="22" fill="#b5532d" stroke="#2e1d14" stroke-width="3"/><rect x="136" y="850" width="44" height="44" rx="22" fill="#f3e3c3" stroke="#2e1d14" stroke-width="3"/><rect x="192" y="850" width="44" height="44" rx="22" fill="#2e1d14" stroke="#2e1d14" stroke-width="3"/><rect x="248" y="850" width="44" height="44" rx="22" fill="#e8a33d" stroke="#2e1d14" stroke-width="3"/><rect x="304" y="850" width="44" height="44" rx="22" fill="#6b8f71" stroke="#2e1d14" stroke-width="3"/>
+  <text x="1520" y="880" font-family="Inter, Arial, sans-serif" font-weight="600" font-size="26" fill="#2e1d14" text-anchor="end" opacity="0.7">placeholder · replace me</text>
+</svg>

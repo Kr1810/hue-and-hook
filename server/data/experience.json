@@ -1,0 +1,45 @@
+{
+  "experience": [
+    {
+      "title": "UI/UX & Graphic Designer Lead",
+      "type": "Full-time",
+      "company": "Techlusion",
+      "location": "Ahmedabad",
+      "workMode": "On-site",
+      "start": "Dec 2025",
+      "end": "Aug 2026",
+      "highlights": [
+        "Designed responsive web and mobile interfaces, dashboards and web platforms in Figma for client and internal projects, backed by user research and competitive analysis.",
+        "Refined websites and launched them live in production using AI tools (Framer AI, Emergent AI, Webflow), making designs more interactive and impactful for users; used Figma AI for early concept and content variations.",
+        "Prototyped design-to-code with Cursor, generating and refining HTML, CSS and React interfaces from Figma concepts to bridge design and development.",
+        "Built responsive website prototypes in Webflow, working with layouts, interactions and CMS.",
+        "Ran usability testing and gathered stakeholder feedback to drive iterative improvements; partnered with developers to turn requirements into consistent interfaces.",
+        "Managed social media platforms and produced social media assets — videos, posts and blog articles — plus branding assets, using Figma, Blender, After Effects, Adobe Express and Canva."
+      ],
+      "tags": ["AI-Assisted Design", "Design-to-Code Prototyping", "Webflow & CMS", "Social Media & Branding"]
+    },
+    {
+      "title": "UI/UX & Graphic Designer",
+      "type": "Internship",
+      "company": "Codage Habitation Pvt. Ltd.",
+      "location": "Ahmedabad",
+      "workMode": "On-site",
+      "start": "Jan 2025",
+      "end": "Jul 2025",
+      "highlights": [
+        "Designed responsive web and mobile interfaces in Figma, Adobe XD and Canva for live client and internal projects.",
+        "Applied wireframing, prototyping, usability testing and visual design across web, mobile, eCommerce, B2B, real-estate and Web3 projects.",
+        "Contributed to product redesigns and branding work based on project requirements and feedback."
+      ],
+      "tags": ["UI/UX Design", "Usability Testing", "Visual Design", "Branding"]
+    }
+  ],
+  "education": [
+    {
+      "degree": "[Degree / Diploma in Design]",
+      "institute": "[Institute]",
+      "year": "[Year]",
+      "_note": "Replace with real details"
+    }
+  ]
+}

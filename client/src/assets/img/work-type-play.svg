@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" width="1600" height="1000">
+  <rect width="1600" height="1000" fill="#f1faee"/>
+  
+    <text x="1000" y="640" font-family="'Space Grotesk', 'Arial Black', Arial, sans-serif" font-weight="700" font-size="420" fill="#e63946" opacity="0.9">A</text>
+    <text x="1170" y="680" font-family="'Space Grotesk', 'Arial Black', Arial, sans-serif" font-weight="700" font-size="420" fill="#457b9d" opacity="0.85">g</text>
+    <text x="1080" y="560" font-family="'Space Grotesk', 'Arial Black', Arial, sans-serif" font-weight="700" font-size="200" fill="#ffb703">અ</text>
+  <text x="80" y="190" font-family="Inter, Arial, sans-serif" font-weight="600" font-size="34" fill="#111111">Typography posters · 2025</text>
+  <text x="72" y="672" font-family="'Space Grotesk', 'Arial Black', Arial, sans-serif" font-weight="700" font-size="150" letter-spacing="-6" fill="#111111">Type</text>
+  <text x="72" y="810" font-family="'Space Grotesk', 'Arial Black', Arial, sans-serif" font-weight="700" font-size="150" letter-spacing="-6" fill="#111111">Play</text>
+  <rect x="80" y="850" width="44" height="44" rx="22" fill="#f1faee" stroke="#111111" stroke-width="3"/><rect x="136" y="850" width="44" height="44" rx="22" fill="#e63946" stroke="#111111" stroke-width="3"/><rect x="192" y="850" width="44" height="44" rx="22" fill="#111111" stroke="#111111" stroke-width="3"/><rect x="248" y="850" width="44" height="44" rx="22" fill="#457b9d" stroke="#111111" stroke-width="3"/><rect x="304" y="850" width="44" height="44" rx="22" fill="#ffb703" stroke="#111111" stroke-width="3"/>
+  <text x="1520" y="880" font-family="Inter, Arial, sans-serif" font-weight="600" font-size="26" fill="#111111" text-anchor="end" opacity="0.7">placeholder · replace me</text>
+</svg>

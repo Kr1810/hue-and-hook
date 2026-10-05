@@ -1,0 +1,255 @@
+/* ==========================================================================
+   Experience timeline
+   Cards keep a fixed cream style in EVERY theme so they stay readable on
+   the coloured backgrounds; text inside uses fixed dark colours.
+   ========================================================================== */
+
+.timeline {
+  --gap: 48px; /* card ↔ line */
+  --line-w: 3px;
+  position: relative;
+  padding-block: 0.5rem 1rem;
+}
+
+/* Centre line (base) + scroll-progress fill */
+.line {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: var(--line-w);
+  transform: translateX(-50%);
+  background: color-mix(in srgb, var(--muted) 40%, transparent);
+  border-radius: 2px;
+}
+
+.fill {
+  position: absolute;
+  inset: 0;
+  background: var(--fg);
+  border-radius: inherit;
+  transform: scaleY(0);
+  transform-origin: top;
+  will-change: transform;
+}
+
+.entries {
+  position: relative;
+  display: grid;
+  gap: clamp(3rem, 6vw, 5rem);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.entry {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr calc(var(--gap) * 2) 1fr;
+}
+
+.right .cardWrap {
+  grid-column: 3;
+}
+
+.left .cardWrap {
+  grid-column: 1;
+}
+
+/* Date label sits ON the line, level with the card top, and breaks the line
+   with a solid page-coloured background. Two lines keep it inside the gap. */
+.date {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  z-index: 1;
+  transform: translateX(-50%);
+  margin: 0;
+  padding: 0.35rem 0.25rem;
+  width: max-content;
+  max-width: calc(var(--gap) * 2);
+  background: var(--bg);
+  transition: background-color var(--theme-fade);
+  font-family: "JetBrains Mono", ui-monospace, "Cascadia Mono", Consolas, monospace;
+  font-size: 0.875rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  line-height: 1.35;
+  text-align: center;
+  color: var(--fg);
+}
+
+.dateText {
+  display: block;
+}
+
+/* ---- Card ---- */
+.card {
+  background: #fcf9f2;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  border-radius: 28px;
+  padding: clamp(24px, 3vw, 40px);
+  box-shadow: 0 20px 50px -20px rgba(0, 0, 0, 0.15);
+  color: #3d4752;
+  transition: transform 250ms ease, box-shadow 250ms ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 28px 60px -20px rgba(0, 0, 0, 0.22);
+}
+
+.card ::selection {
+  background: #1f2328;
+  color: #fcf9f2;
+}
+
+.title {
+  margin: 0 0 0.6rem;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.75rem;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: #1f2328;
+  text-wrap: pretty;
+}
+
+.type {
+  font-weight: 500;
+  color: #4a5560;
+}
+
+.meta {
+  margin: 0 0 24px;
+  font-family: "JetBrains Mono", ui-monospace, "Cascadia Mono", Consolas, monospace;
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #5b6670;
+}
+
+/* Dash markers with a hanging indent so wrapped lines align with the text. */
+.highlights {
+  display: grid;
+  gap: 16px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.highlights li {
+  position: relative;
+  padding-left: 1.4em;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: #3d4752;
+}
+
+.highlights li::before {
+  content: "–";
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: #2c4a5c;
+  font-weight: 600;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 28px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tags li {
+  padding: 6px 16px;
+  border: 1px solid #d9ddd9;
+  border-radius: 8px;
+  background: #eef0ee;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  line-height: 1.4;
+  color: #2c4a5c;
+}
+
+/* ---- Education ---- */
+.education {
+  display: grid;
+  gap: 1rem;
+  margin: 0 0 var(--space-m);
+  padding: 0;
+  list-style: none;
+  max-width: 40rem;
+}
+
+.eduItem {
+  padding: clamp(20px, 2.5vw, 28px);
+  border-radius: 20px;
+  background: #fcf9f2;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow: 0 20px 50px -20px rgba(0, 0, 0, 0.15);
+}
+
+.eduDegree {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.35rem;
+  color: #1f2328;
+}
+
+.eduMeta {
+  margin: 0.35rem 0 0;
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 0.85rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #5b6670;
+}
+
+/* ---- Mobile: single column, line on the left ---- */
+@media (max-width: 899px) {
+  .line {
+    left: 16px;
+  }
+
+  .entry {
+    grid-template-columns: 1fr;
+    padding-left: calc(16px + 28px);
+  }
+
+  .right .cardWrap,
+  .left .cardWrap {
+    grid-column: 1;
+  }
+
+  .date {
+    position: relative;
+    left: auto;
+    transform: none;
+    max-width: none;
+    margin-bottom: 0.75rem;
+    padding: 0.2rem 0.5rem;
+    text-align: left;
+    justify-self: start;
+  }
+
+  .date br {
+    display: none;
+  }
+
+  .title {
+    font-size: 1.45rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card:hover {
+    transform: none;
+  }
+}

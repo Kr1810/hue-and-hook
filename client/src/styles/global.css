@@ -1,0 +1,1192 @@
+/* ==========================================================================
+   Krina Suthar — global stylesheet
+   --------------------------------------------------------------------------
+   1. Fonts (metric-matched fallbacks)
+   2. Themes (CSS custom properties)        ← change colors here
+   3. Base / reset
+   4. Accessibility helpers
+   5. Shader background
+   6. Layout + typography
+   7. Shared components (buttons, tags, forms, callouts, pager, skeletons)
+   8. Page blocks
+   9. Motion (name reveal)
+  10. Reduced motion
+   Component-specific styles live next to components as *.module.css.
+   ========================================================================== */
+
+
+/* 1. Fonts ------------------------------------------------------------------
+   Google Fonts load with display=swap. These local fallbacks are size-adjusted
+   to roughly match Inter / Space Grotesk, so the swap barely shifts layout. */
+@font-face {
+  font-family: "Inter Fallback";
+  src: local("Arial"), local("ArialMT"), local("Helvetica");
+  size-adjust: 107%;
+  ascent-override: 90.5%;
+  descent-override: 22.5%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: "Space Grotesk Fallback";
+  src: local("Arial Bold"), local("Arial-BoldMT"), local("Arial");
+  font-weight: 700;
+  size-adjust: 98%;
+  ascent-override: 98%;
+  descent-override: 29%;
+  line-gap-override: 0%;
+}
+
+
+/* 2. Themes -----------------------------------------------------------------
+     --bg / --fg      page background + text
+     --accent         highlights, marquee, focus ring
+     --on-accent      text placed on --accent
+     --muted          secondary text (≥ 4.5:1 contrast on --bg)
+     --selection      ::selection background
+   The shader reads --bg and --accent automatically. */
+:root,
+[data-theme="electric"] {
+  --bg: #1f3cff;
+  --fg: #f4f1ea;
+  --accent: #ffe14d;
+  --on-accent: #1f3cff;
+  --muted: #cdd3ff;
+  --selection: #ffe14d;
+  --on-selection: #1f3cff;
+  --danger: #ffd0d0;
+  color-scheme: dark;
+}
+
+[data-theme="ultraviolet"] {
+  --bg: #5b2bd9;
+  --fg: #f6f0ff;
+  --accent: #7dffcf;
+  --on-accent: #2a0f78;
+  --muted: #dccfff;
+  --selection: #7dffcf;
+  --on-selection: #2a0f78;
+  --danger: #ffd6e4;
+  color-scheme: dark;
+}
+
+[data-theme="hotpink"] {
+  --bg: #ff3d8b;
+  --fg: #1a0d14;
+  --accent: #fff36b;
+  --on-accent: #1a0d14;
+  --muted: #3d1028;
+  --selection: #fff36b;
+  --on-selection: #1a0d14;
+  --danger: #3d0012;
+  color-scheme: light;
+}
+
+[data-theme="ink"] {
+  --bg: #0b0b0c;
+  --fg: #ededed;
+  --accent: #ff3d8b;
+  --on-accent: #0b0b0c;
+  --muted: #a8a8ad;
+  --selection: #ff3d8b;
+  --on-selection: #0b0b0c;
+  --danger: #ff9ab8;
+  color-scheme: dark;
+}
+
+/* Non-color tokens */
+:root {
+  --font-display: "Space Grotesk", "Space Grotesk Fallback", system-ui, sans-serif;
+  --font-body: "Inter", "Inter Fallback", system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  --wrap: 1200px;
+  --gutter: clamp(1rem, 4vw, 3rem);
+  --space-s: 1rem;
+  --space-m: clamp(1.5rem, 3vw, 2rem);
+  --space-l: clamp(2.5rem, 6vw, 4rem);
+  --space-xl: clamp(4rem, 10vw, 8rem);
+
+  --border: 2px;
+  --border-thick: 3px;
+  --ease-out: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --theme-fade: 400ms ease;
+}
+
+
+/* 3. Base / reset ----------------------------------------------------------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  /* Background on <html> (not <body>) so the z-index:-1 shader paints above it. */
+  background-color: var(--bg);
+  color: var(--fg);
+  transition: background-color var(--theme-fade), color var(--theme-fade);
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  overflow-x: clip;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: var(--font-body);
+  font-size: 1.125rem;
+  line-height: 1.6;
+  color: var(--fg);
+  transition: color var(--theme-fade);
+  overflow-x: clip;
+  -webkit-font-smoothing: antialiased;
+}
+
+img,
+svg,
+canvas {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+h1, h2, h3, h4 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  text-wrap: balance;
+}
+
+p, ul, ol, dl, dd, figure, blockquote {
+  margin: 0;
+}
+
+ul[class],
+ol[class] {
+  list-style: none;
+  padding: 0;
+}
+
+a {
+  color: inherit;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+strong {
+  font-weight: 600;
+}
+
+::selection {
+  background: var(--selection);
+  color: var(--on-selection);
+}
+
+
+/* 4. Accessibility helpers -------------------------------------------------- */
+.sr-only {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link {
+  position: absolute;
+  top: 0.75rem;
+  left: 0.75rem;
+  z-index: 1000;
+  padding: 0.75rem 1.25rem;
+  background: var(--fg);
+  color: var(--bg);
+  font-weight: 600;
+  text-decoration: none;
+  transform: translateY(-200%);
+}
+
+.skip-link:focus {
+  transform: none;
+}
+
+:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 3px;
+}
+
+main:focus,
+[tabindex="-1"]:focus {
+  outline: none;
+}
+
+
+/* 5. Shader background ------------------------------------------------------
+   <ShaderBackground /> puts a canvas inside .shader. It fades in once the
+   first frame is drawn; without WebGL a CSS gradient stands in. */
+.shader {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 700ms ease;
+}
+
+.shader canvas {
+  width: 100%;
+  height: 100%;
+  image-rendering: pixelated; /* rendered at half resolution on purpose */
+}
+
+.shader.is-ready,
+.shader.is-fallback {
+  opacity: var(--shader-opacity, 0.25);
+}
+
+.shader.is-fallback {
+  background:
+    radial-gradient(circle at 82% 22%, var(--accent) 0 7%, transparent 28%),
+    radial-gradient(circle at 12% 88%, var(--accent) 0 3%, transparent 22%),
+    radial-gradient(120% 90% at 70% 10%, transparent 40%, rgb(0 0 0 / 0.28)),
+    var(--bg);
+}
+
+
+/* 6. Layout + typography ---------------------------------------------------- */
+.wrap {
+  max-width: var(--wrap);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Stop wide children (the marquee track) stretching flex items. */
+.wrap > * {
+  min-width: 0;
+}
+
+/* min-height keeps the footer below the fold while a route chunk loads, so
+   swapping the skeleton for the real page never visibly moves it (CLS). */
+main {
+  flex: 1;
+  min-height: 100vh;
+}
+
+/* Page-transition wrapper (App.jsx). flow-root stops a page's first margin
+   collapsing through it, so the wrapper doesn't jump when content arrives. */
+.route {
+  display: flow-root;
+}
+
+.page-head {
+  padding-top: clamp(3rem, 9vw, 6.5rem);
+  margin-bottom: var(--space-l);
+}
+
+.eyebrow {
+  margin-bottom: var(--space-s);
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--muted);
+}
+
+.eyebrow a {
+  text-underline-offset: 0.2em;
+}
+
+.page-title {
+  font-size: clamp(3rem, 10vw, 8rem);
+  line-height: 0.9;
+  letter-spacing: -0.045em;
+  overflow-wrap: break-word;
+  hyphens: auto;
+}
+
+.page-title--long {
+  font-size: clamp(2.5rem, 7vw, 5.75rem);
+  line-height: 0.95;
+  max-width: 18ch;
+}
+
+.lede {
+  margin-top: var(--space-m);
+  max-width: 40ch;
+  font-size: clamp(1.25rem, 2.2vw, 1.6rem);
+  line-height: 1.4;
+}
+
+.section {
+  margin-top: var(--space-xl);
+  scroll-margin-top: 2rem;
+}
+
+.section-title {
+  margin-bottom: var(--space-m);
+  font-size: clamp(2rem, 5vw, 3.5rem);
+}
+
+.section-intro {
+  max-width: 60ch;
+  margin-bottom: var(--space-m);
+  color: var(--muted);
+}
+
+.section-note {
+  margin-top: var(--space-m);
+}
+
+/* Long-form content (Markdown) */
+.prose {
+  max-width: 65ch;
+}
+
+.prose > * + * {
+  margin-top: 1.1em;
+}
+
+.prose h2 {
+  margin-top: 2.2em;
+  font-size: clamp(1.75rem, 3.6vw, 2.5rem);
+}
+
+.prose h3 {
+  margin-top: 1.8em;
+  font-size: clamp(1.3rem, 2.4vw, 1.6rem);
+}
+
+.prose h2 + *,
+.prose h3 + * {
+  margin-top: 0.7em;
+}
+
+.prose ul,
+.prose ol {
+  padding-left: 1.3em;
+}
+
+.prose li + li {
+  margin-top: 0.4em;
+}
+
+.prose li::marker {
+  font-weight: 600;
+}
+
+.prose a,
+.text-link {
+  text-decoration: underline;
+  text-decoration-thickness: 0.08em;
+  text-underline-offset: 0.18em;
+  transition: text-decoration-color 200ms, text-decoration-thickness 200ms;
+}
+
+.prose a:hover,
+.text-link:hover {
+  text-decoration-color: var(--accent);
+  text-decoration-thickness: 0.16em;
+}
+
+.prose a.button {
+  text-decoration: none;
+}
+
+.prose blockquote {
+  padding-left: 1.2em;
+  border-left: var(--border-thick) solid currentColor;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.4em;
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+}
+
+.prose > :first-child {
+  margin-top: 0;
+}
+
+/* Animated underline (nav, footer, big links) */
+.link-underline {
+  text-decoration: none;
+  background-image: linear-gradient(currentColor, currentColor);
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  background-size: 0% 0.12em;
+  transition: background-size 350ms var(--ease-out);
+}
+
+.link-underline:hover,
+.link-underline:focus-visible,
+.link-underline[aria-current="page"] {
+  background-size: 100% 0.12em;
+}
+
+
+/* 7. Shared components ------------------------------------------------------ */
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5em;
+  padding: 0.85em 1.4em;
+  border: var(--border) solid var(--fg);
+  background: var(--fg);
+  color: var(--bg);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.1rem;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 200ms, color 200ms, border-color 200ms, opacity 200ms;
+}
+
+.button:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--on-accent);
+}
+
+.button:disabled {
+  opacity: 0.6;
+  cursor: progress;
+}
+
+.button--ghost {
+  background: var(--bg); /* solid so it stays legible over shader blobs */
+  color: var(--fg);
+}
+
+.button--big {
+  font-size: clamp(1.2rem, 2.2vw, 1.5rem);
+  padding: 1em 1.6em;
+}
+
+.tag {
+  display: inline-block;
+  padding: 0.2em 0.65em;
+  border: var(--border) solid currentColor;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  line-height: 1.4;
+  white-space: nowrap;
+}
+
+.callout {
+  margin-top: var(--space-l);
+  max-width: 65ch;
+  padding: var(--space-m);
+  border: var(--border-thick) solid currentColor;
+  background: var(--bg);
+}
+
+.callout > * + * {
+  margin-top: 0.75em;
+}
+
+.callout__title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.6rem;
+  letter-spacing: -0.02em;
+}
+
+/* Prev / next */
+.pager {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-s);
+  margin-top: var(--space-xl);
+}
+
+.pager__link {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  padding: var(--space-m);
+  border: var(--border) solid currentColor;
+  background: var(--bg);
+  text-decoration: none;
+  transition: background-color 200ms, color 200ms;
+}
+
+.pager__link--next {
+  grid-column: 2;
+  text-align: right;
+}
+
+.pager__link:hover {
+  background: var(--fg);
+  color: var(--bg);
+}
+
+.pager__label {
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.pager__title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.15rem, 2.4vw, 1.6rem);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+/* Forms */
+.form {
+  display: grid;
+  gap: var(--space-s);
+  max-width: 40rem;
+}
+
+.form__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr));
+  gap: var(--space-s);
+}
+
+.field {
+  display: grid;
+  gap: 0.35rem;
+  align-content: start;
+}
+
+.field label,
+.field legend {
+  font-weight: 600;
+}
+
+.field input,
+.field textarea,
+.field select {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  border: var(--border) solid currentColor;
+  border-radius: 0;
+  background: var(--bg);
+  color: var(--fg);
+  transition: background-color var(--theme-fade);
+}
+
+.field textarea {
+  min-height: 9rem;
+  resize: vertical;
+}
+
+.field input:focus-visible,
+.field textarea:focus-visible,
+.field select:focus-visible {
+  outline-offset: 0;
+}
+
+.field [aria-invalid="true"] {
+  border-style: dashed;
+  border-width: var(--border-thick);
+}
+
+.field__hint {
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+.field__error {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--danger);
+}
+
+.field__error::before {
+  content: "↳ ";
+}
+
+.form__row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.form__row input {
+  flex: 1 1 16rem;
+  width: auto;
+}
+
+.form__status {
+  padding: 0.9rem 1.1rem;
+  border: var(--border) solid currentColor;
+  background: var(--bg);
+  font-weight: 600;
+}
+
+.form__status--success {
+  background: var(--accent);
+  color: var(--on-accent);
+  border-color: var(--accent);
+}
+
+/* Honeypot: off-screen for humans, still in the DOM for bots. */
+.honeypot {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+/* Skeletons + status */
+.skeleton {
+  display: block;
+  border-radius: 2px;
+  background: color-mix(in srgb, var(--fg) 14%, transparent);
+  animation: skeleton-pulse 1.4s ease-in-out infinite;
+}
+
+.skeleton-stack {
+  display: grid;
+  gap: 0.75rem;
+}
+
+@keyframes skeleton-pulse {
+  50% { opacity: 0.45; }
+}
+
+.error-state {
+  max-width: 50ch;
+  padding: var(--space-m);
+  border: var(--border-thick) dashed currentColor;
+  background: var(--bg);
+}
+
+.error-state > * + * {
+  margin-top: 0.75rem;
+}
+
+.error-state__title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.4rem;
+}
+
+/* top ▲ */
+.to-top-wrap {
+  margin-top: var(--space-l);
+  text-align: right;
+}
+
+.to-top {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.1rem;
+  padding: 0.4rem 0;
+}
+
+
+/* 8. Page blocks ------------------------------------------------------------ */
+
+/* Home */
+.hero {
+  margin-top: clamp(1.5rem, 4vw, 2.5rem);
+}
+
+.hero__tagline {
+  max-width: 34ch;
+  font-size: clamp(1.25rem, 2.4vw, 1.75rem);
+  line-height: 1.35;
+  font-weight: 600;
+}
+
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6em;
+  margin-top: var(--space-m);
+  padding: 0.4em 1em;
+  border: var(--border) solid currentColor;
+  border-radius: 999px;
+  background: var(--bg);
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: background-color var(--theme-fade);
+}
+
+.status-pill__dot {
+  position: relative;
+  width: 0.6em;
+  height: 0.6em;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+.status-pill__dot::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: var(--accent);
+  animation: status-pulse 2s ease-out infinite;
+}
+
+@keyframes status-pulse {
+  from { transform: scale(1); opacity: 0.7; }
+  to { transform: scale(2.6); opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .status-pill__dot::after {
+    animation: none;
+    display: none;
+  }
+}
+
+.currently {
+  margin-top: clamp(2.5rem, 6vw, 4rem);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.5rem 0.9rem;
+  font-size: clamp(1.1rem, 2vw, 1.35rem);
+  font-weight: 600;
+  min-height: 2.4em;
+}
+
+.currently__label {
+  padding: 0.1em 0.6em;
+  background: var(--fg);
+  color: var(--bg);
+  font-family: var(--font-display);
+  font-weight: 700;
+}
+
+.currently__text {
+  padding: 0.1em 0.35em;
+  background: var(--bg);
+  transition: background-color var(--theme-fade);
+}
+
+/* About */
+.bio {
+  display: grid;
+  gap: var(--space-l);
+}
+
+@media (min-width: 900px) {
+  .bio {
+    grid-template-columns: minmax(0, 1fr) 20rem;
+    align-items: start;
+  }
+}
+
+.bio__portrait {
+  border: var(--border-thick) solid currentColor;
+  background: var(--bg);
+}
+
+.bio__portrait img {
+  width: 100%;
+}
+
+.bio__portrait figcaption {
+  padding: 0.6rem 0.9rem;
+  font-size: 0.9rem;
+  border-top: var(--border) solid currentColor;
+}
+
+/* Case study */
+.case-meta {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 11rem), 1fr));
+  gap: var(--space-s) var(--space-m);
+  margin-top: var(--space-l);
+  padding-block: var(--space-s);
+  border-block: var(--border) solid currentColor;
+}
+
+.case-meta dt {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+.case-meta dd {
+  margin-top: 0.15rem;
+  font-weight: 600;
+}
+
+.case-cover {
+  margin-top: var(--space-l);
+  border: var(--border) solid currentColor;
+  aspect-ratio: 16 / 10;
+  background: var(--fg);
+}
+
+.case-cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.palette {
+  margin-block: var(--space-m) var(--space-l);
+}
+
+.palette__title {
+  margin-bottom: 0.75rem;
+  font-size: 1rem;
+  font-family: var(--font-body);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--muted);
+}
+
+.palette__swatches {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem 1.25rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.palette__swatches li {
+  display: grid;
+  justify-items: center;
+  gap: 0.4rem;
+}
+
+.palette__chip {
+  display: block;
+  width: 3.25rem;
+  height: 3.25rem;
+  border-radius: 50%;
+  border: var(--border) solid currentColor;
+}
+
+.palette__swatches code {
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+}
+
+.result-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr));
+  gap: var(--space-m);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.result-list li {
+  padding-top: var(--space-s);
+  border-top: var(--border-thick) solid currentColor;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.5rem, 3vw, 2.25rem);
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+}
+
+/* About: services / tools / process */
+.skill-columns {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr));
+  gap: var(--space-l) var(--space-m);
+}
+
+.text-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: var(--border) solid currentColor;
+}
+
+.text-list li {
+  padding-block: 0.8rem;
+  border-bottom: var(--border) solid currentColor;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.15rem, 2vw, 1.45rem);
+  letter-spacing: -0.02em;
+}
+
+.process {
+  counter-reset: step;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr));
+  gap: var(--space-m);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.process li {
+  counter-increment: step;
+  padding-top: var(--space-s);
+  border-top: var(--border-thick) solid currentColor;
+}
+
+.process li::before {
+  content: counter(step, decimal-leading-zero);
+  display: block;
+  margin-bottom: 0.5rem;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(2.5rem, 5vw, 3.5rem);
+  line-height: 1;
+  letter-spacing: -0.05em;
+}
+
+.process h3 {
+  margin-bottom: 0.4rem;
+  font-size: 1.5rem;
+}
+
+.process p {
+  color: var(--muted);
+}
+
+/* Contact rows */
+.contact-rows {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: var(--border) solid currentColor;
+}
+
+.contact-row {
+  display: grid;
+  grid-template-columns: 7rem minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 0.5rem var(--space-m);
+  padding-block: clamp(1rem, 2.5vw, 1.5rem);
+  border-bottom: var(--border) solid currentColor;
+}
+
+.contact-row__label {
+  font-weight: 600;
+  color: var(--muted);
+}
+
+.contact-row__value {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.4rem, 4.5vw, 3rem);
+  line-height: 1.1;
+  letter-spacing: -0.035em;
+  overflow-wrap: anywhere;
+}
+
+.contact-row__social {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+  justify-self: start;
+}
+
+.contact-row__social svg {
+  width: 0.85em;
+  height: 0.85em;
+}
+
+.contact-row__copy {
+  padding: 0.5em 1em;
+  border: var(--border) solid currentColor;
+  border-radius: 999px;
+  background: var(--bg);
+  font-weight: 600;
+  font-size: 0.9rem;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background-color 200ms, color 200ms, border-color 200ms;
+}
+
+.contact-row__copy:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--on-accent);
+}
+
+.contact-row__arrow {
+  font-size: 1.5rem;
+  justify-self: end;
+}
+
+@media (max-width: 640px) {
+  .contact-row {
+    grid-template-columns: 1fr auto;
+  }
+  .contact-row__label {
+    grid-column: 1 / -1;
+  }
+}
+
+/* Accordion */
+.accordion {
+  max-width: 50rem;
+  border-top: var(--border) solid currentColor;
+}
+
+.accordion__item {
+  border-bottom: var(--border) solid currentColor;
+}
+
+.accordion__heading {
+  font-size: inherit;
+  letter-spacing: normal;
+}
+
+.accordion__trigger {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: var(--space-s);
+  width: 100%;
+  padding: 1.1rem 0;
+  border: 0;
+  background: none;
+  text-align: left;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.15rem, 2.2vw, 1.45rem);
+  letter-spacing: -0.02em;
+  cursor: pointer;
+}
+
+.accordion__icon {
+  flex-shrink: 0;
+  font-size: 1.6em;
+  line-height: 0.6;
+  transition: transform 300ms var(--ease-out);
+}
+
+.accordion__trigger[aria-expanded="true"] .accordion__icon {
+  transform: rotate(45deg);
+}
+
+.accordion__panel {
+  padding-bottom: 1.25rem;
+  max-width: 62ch;
+}
+
+/* 404 */
+.lost {
+  padding-top: clamp(3rem, 10vw, 7rem);
+}
+
+.lost__code {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(7rem, 30vw, 22rem);
+  line-height: 0.8;
+  letter-spacing: -0.06em;
+}
+
+.lost .lede {
+  max-width: 34ch;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-s);
+  margin-top: var(--space-m);
+}
+
+
+/* 9. Motion: name reveal ----------------------------------------------------
+   <SplitName /> renders one span per letter with --i set for the stagger. */
+.split-name {
+  font-size: clamp(4rem, 14vw, 13rem);
+  line-height: 0.85;
+  letter-spacing: -0.04em;
+  overflow-wrap: anywhere;
+  text-wrap: wrap;
+}
+
+.split-name__word {
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.split-name__char {
+  display: inline-block;
+  animation: char-rise 900ms var(--ease-out) both;
+  animation-delay: calc(var(--i, 0) * 45ms + 80ms);
+}
+
+@keyframes char-rise {
+  from {
+    transform: translateY(0.5em) rotate(4deg);
+    clip-path: inset(150% -20% -40% -20%);
+  }
+  to {
+    transform: none;
+    clip-path: inset(-40% -20% -40% -20%);
+  }
+}
+
+
+/* "View →" pill that follows the mouse over work cards (<CursorPill />). */
+.cursor-pill {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  padding: 0.45em 0.95em;
+  border-radius: 999px;
+  background: var(--accent);
+  color: var(--on-accent);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.95rem;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  scale: 0.5;
+  transition: opacity 200ms ease, scale 250ms var(--ease-out);
+  will-change: transform;
+}
+
+.cursor-pill.is-visible {
+  opacity: 1;
+  scale: 1;
+}
+
+
+/* 10. Reduced motion -------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-delay: 0s !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    transition-delay: 0s !important;
+  }
+
+}

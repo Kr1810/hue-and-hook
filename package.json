@@ -1,0 +1,23 @@
+{
+  "name": "krina-suthar-site",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Krina Suthar — portfolio for a content creator. React + Vite client, Node/Express API.",
+  "type": "module",
+  "workspaces": [
+    "client",
+    "server"
+  ],
+  "scripts": {
+    "dev": "concurrently -k -n server,client -c magenta,cyan \"npm run dev -w server\" \"npm run dev -w client\"",
+    "build": "npm run build -w client",
+    "start": "npm start -w server",
+    "lint": "npm run lint -w client && npm run lint -w server"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.0"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

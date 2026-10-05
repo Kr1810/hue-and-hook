@@ -1,0 +1,89 @@
+.card {
+  position: relative;
+  height: 100%;
+}
+
+.media {
+  aspect-ratio: var(--card-ratio, 16 / 10);
+  overflow: hidden;
+  border: var(--border) solid currentColor;
+  background: var(--fg);
+}
+
+.media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 700ms var(--ease-out);
+}
+
+.card:hover .media img {
+  transform: scale(1.04);
+}
+
+.meta {
+  padding-top: 1rem;
+}
+
+.type,
+.client {
+  font-size: 0.95rem;
+  color: var(--muted);
+}
+
+.client strong {
+  color: var(--fg);
+}
+
+.title {
+  margin-block: 0.35rem;
+  font-size: clamp(1.6rem, 3.4vw, 2.6rem);
+  line-height: 1.02;
+  letter-spacing: -0.035em;
+}
+
+.title a {
+  text-decoration: none;
+}
+
+/* Stretch the title link over the whole card. */
+.title a::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.title a:focus-visible {
+  outline: none;
+}
+
+.card:has(a:focus-visible) {
+  outline: 3px solid var(--accent);
+  outline-offset: 8px;
+}
+
+/* Accent highlight sweeps in behind the title on hover/focus. */
+.title span {
+  background-image: linear-gradient(var(--accent), var(--accent));
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  background-size: 0% 100%;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+  padding-inline: 0.06em;
+  margin-inline: -0.06em;
+  transition: background-size 450ms var(--ease-out), color 250ms;
+}
+
+.card:hover .title span,
+.card:has(a:focus-visible) .title span {
+  background-size: 100% 100%;
+  color: var(--on-accent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card:hover .media img {
+    transform: none;
+  }
+}

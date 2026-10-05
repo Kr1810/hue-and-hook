@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en" data-theme="electric">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!--
+      No-flash theme: apply the saved theme before anything paints.
+      It also injects the Google Fonts stylesheet so fonts never block
+      rendering (and no inline event handlers are needed under the CSP).
+      The server hashes this script for its Content-Security-Policy, so if
+      you edit it, rebuild before starting production.
+    -->
+    <script>
+      (function () {
+        var root = document.documentElement;
+        var themes = ["electric", "ultraviolet", "hotpink", "ink"];
+        var theme = "electric";
+        try {
+          var saved = localStorage.getItem("theme");
+          if (themes.indexOf(saved) > -1) theme = saved;
+        } catch (e) {}
+        root.setAttribute("data-theme", theme);
+
+        var fonts = document.createElement("link");
+        fonts.rel = "stylesheet";
+        fonts.href = "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@700&family=VT323&family=JetBrains+Mono:wght@400;500&display=swap";
+        document.head.appendChild(fonts);
+      })();
+    </script>
+
+    <title>home - Krina Suthar [Graphic designer]</title>
+    <!-- data-rh lets react-helmet-async replace these once the app runs. -->
+    <meta data-rh="true" name="description" content="Krina Suthar is a graphic designer in Ahmedabad designing brand identities, packaging, social creatives and UI visuals. Available for freelance and full-time roles." />
+    <meta name="theme-color" content="#1f3cff" />
+
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <noscript>
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@700&family=VT323&family=JetBrains+Mono:wght@400;500&display=swap" />
+    </noscript>
+  </head>
+  <body>
+    <noscript>
+      <p style="padding: 1rem; font-family: system-ui, sans-serif">
+        This site needs JavaScript to run. You can still reach Krina Suthar, graphic designer:
+        email 121krinas@gmail.com · phone +91 96879 09729 ·
+        LinkedIn https://www.linkedin.com/in/krina-suthar-510537226
+      </p>
+    </noscript>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

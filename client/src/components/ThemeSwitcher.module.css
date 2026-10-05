@@ -1,0 +1,44 @@
+.switcher {
+  display: flex;
+  align-items: center;
+  gap: 0.15rem;
+  margin-left: auto; /* stays right-aligned when the header row wraps */
+  margin-right: -0.5rem; /* optically align the last dot with the edge */
+}
+
+/* Swatch colors — keep in sync with the theme blocks in global.css. */
+.swatch[data-swatch="electric"]    { --swatch: #1f3cff; --swatch-dot: #ffe14d; }
+.swatch[data-swatch="ultraviolet"] { --swatch: #5b2bd9; --swatch-dot: #7dffcf; }
+.swatch[data-swatch="hotpink"]     { --swatch: #ff3d8b; --swatch-dot: #fff36b; }
+.swatch[data-swatch="ink"]         { --swatch: #0b0b0c; --swatch-dot: #ff3d8b; }
+
+.swatch {
+  display: grid;
+  place-items: center;
+  width: 44px; /* comfortable touch target */
+  height: 44px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  cursor: pointer;
+}
+
+.dot {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  border: var(--border) solid currentColor;
+  background: radial-gradient(circle, var(--swatch-dot) 0 27%, var(--swatch) 30%);
+  outline: var(--border) solid transparent;
+  outline-offset: 3px;
+  transition: transform 250ms var(--ease-out), outline-color 250ms;
+}
+
+.swatch:hover .dot {
+  transform: scale(1.12);
+}
+
+.swatch[aria-pressed="true"] .dot {
+  outline-color: currentColor;
+}

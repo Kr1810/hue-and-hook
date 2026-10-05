@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" width="1600" height="1000">
+  <rect width="1600" height="1000" fill="#0b0b0c"/>
+  
+    <rect x="1100" y="320" width="150" height="150" fill="#1f3cff"/>
+    <circle cx="1310" cy="395" r="75" fill="#ffd23f"/>
+    <path d="M1100 500 h150 l-75 150 z" fill="#ff6f61"/>
+    <rect x="1235" y="500" width="150" height="150" rx="75" fill="#1f3cff" opacity="0.6"/>
+    <line x1="980" y1="360" x2="1070" y2="360" stroke="#ff6f61" stroke-width="8" stroke-linecap="round" opacity="1"/><line x1="990" y1="420" x2="1070" y2="420" stroke="#ff6f61" stroke-width="8" stroke-linecap="round" opacity="0.75"/><line x1="1000" y1="480" x2="1070" y2="480" stroke="#ff6f61" stroke-width="8" stroke-linecap="round" opacity="0.5"/>
+  <text x="80" y="190" font-family="Inter, Arial, sans-serif" font-weight="600" font-size="34" fill="#f4f1ea">Motion graphics · 2025</text>
+  <text x="72" y="672" font-family="'Space Grotesk', 'Arial Black', Arial, sans-serif" font-weight="700" font-size="150" letter-spacing="-6" fill="#f4f1ea">Motion</text>
+  <text x="72" y="810" font-family="'Space Grotesk', 'Arial Black', Arial, sans-serif" font-weight="700" font-size="150" letter-spacing="-6" fill="#f4f1ea">Mark</text>
+  <rect x="80" y="850" width="44" height="44" rx="22" fill="#0b0b0c" stroke="#f4f1ea" stroke-width="3"/><rect x="136" y="850" width="44" height="44" rx="22" fill="#1f3cff" stroke="#f4f1ea" stroke-width="3"/><rect x="192" y="850" width="44" height="44" rx="22" fill="#ff6f61" stroke="#f4f1ea" stroke-width="3"/><rect x="248" y="850" width="44" height="44" rx="22" fill="#f4f1ea" stroke="#f4f1ea" stroke-width="3"/><rect x="304" y="850" width="44" height="44" rx="22" fill="#ffd23f" stroke="#f4f1ea" stroke-width="3"/>
+  <text x="1520" y="880" font-family="Inter, Arial, sans-serif" font-weight="600" font-size="26" fill="#f4f1ea" text-anchor="end" opacity="0.7">placeholder · replace me</text>
+</svg>

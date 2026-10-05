@@ -1,0 +1,39 @@
+.footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem var(--space-m);
+  margin-top: var(--space-xl);
+  padding-block: var(--space-m) clamp(1.5rem, 4vw, 2.5rem);
+  border-top: var(--border) solid currentColor;
+  font-size: 0.95rem;
+}
+
+.links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.25rem 1.5rem;
+  font-weight: 600;
+}
+
+.sound {
+  padding: 0.1em 0.6em;
+  border: var(--border) solid currentColor;
+  border-radius: 999px;
+  background: transparent;
+  font-weight: 600;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.sound[aria-pressed="true"] {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--on-accent);
+}
+
+.legal {
+  color: var(--muted);
+}
